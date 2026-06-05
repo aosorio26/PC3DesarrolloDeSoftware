@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voz Ciudadana</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="hero">
+        <div class="topbar">
+            <div>
+                <span class="etiqueta">Plataforma legislativa ciudadana</span>
+                <h1>Voz Ciudadana</h1>
+                <p>Propuestas, firmas, comentarios, modificaciones y seguimiento congresal en una sola plataforma.</p>
+            </div>
+            <div class="contador-header">
+                <span>Meta para las propuestas</span>
+                <strong>25 000 firmas</strong>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="sesion-box">
+            <div>
+                <h2>Inicio de sesión de demostración</h2>
+                <p>Ingresa una firma digital válida y luego elige el tipo de usuario asociado.</p>
+                <div class="firma-sesion">
+                    <label for="firmaSesion">Firma digital de sesión</label>
+                    <input id="firmaSesion" placeholder="Ejemplo: CERT-ORGANIZACION-2026-001" required>
+                    <small>Esta firma se solicita para cualquier rol antes de usar la plataforma.</small>
+                </div>
+            </div>
+            <div class="roles">
+                <button class="rol" data-rol="representante">Representante de colectivo</button>
+                <button class="rol" data-rol="ciudadano">Usuario ciudadano</button>
+                <button class="rol" data-rol="congreso">Usuario del Congreso</button>
+            </div>
+            <p id="rolActual" class="rol-actual">Sesión pendiente: ingresa una firma digital y elige un rol</p>
+        </section>
+
+        <nav class="tabs" aria-label="Secciones principales">
+            <button class="tab activo" data-tab="tabPropuesta" data-roles="representante">Propuesta</button>
+            <button class="tab" data-tab="tabFirma" data-roles="ciudadano">Firmar</button>
+            <button class="tab" data-tab="tabComentario" data-roles="ciudadano,representante">Comentar</button>
+            <button class="tab" data-tab="tabModificacion" data-roles="ciudadano,representante">Modificación</button>
+            <button class="tab" data-tab="tabRecursos" data-roles="representante">Recursos</button>
+            <button class="tab" data-tab="tabFirmaDigital" data-roles="congreso">Firma digital</button>
+            <button class="tab" data-tab="tabCongreso" data-roles="congreso">Congeladas</button>
+            <button class="tab" data-tab="tabListado" data-roles="representante,ciudadano,congreso">Propuestas</button>
+        </nav>
+
+        <div id="mensaje"></div>
+
+        <section id="tabPropuesta" class="panel tab-content activo">
+            <div class="panel-titulo">
+                <span class="marca">VC</span>
+                <div>
+                    <h2>Nueva propuesta normativa</h2>
+                    <p>Disponible para representantes de colectivos. Registra la iniciativa y su texto base.</p>
+                </div>
+            </div>
+            <form id="formPropuesta">
+                <input id="titulo" placeholder="Título de la propuesta" required>
+                <input id="colectivo" placeholder="Nombre del colectivo civil" required>
+                <input id="categoria" placeholder="Categoría o comisión sugerida" required>
+                <textarea id="resumen" placeholder="Resumen ciudadano de la propuesta" required></textarea>
+                <textarea id="textoNormativo" placeholder="Texto normativo propuesto" required></textarea>
+                <button type="submit">Crear propuesta</button>
+            </form>
+        </section>
+
+        <section id="tabFirma" class="panel tab-content">
+            <div class="panel-titulo">
+                <span class="marca">VC</span>
+                <div>
+                    <h2>Firma ciudadana</h2>
+                    <p>Disponible para usuarios ciudadanos. Al llegar a 25 000 firmas válidas, el backend congela automáticamente el expediente.</p>
+                </div>
+            </div>
+            <form id="formFirma">
+                <input id="firmaId" placeholder="ID de propuesta" required>
+                <input id="dni" placeholder="DNI" minlength="8" maxlength="8" required>
+                <input id="nombres" placeholder="Nombres y apellidos" required>
+                <input id="correo" type="email" placeholder="Correo electrónico" required>
+                <button type="submit">Registrar firma</button>
+            </form>
+        </section>
+
+        <section id="tabComentario" class="panel tab-content">
+            <div class="panel-titulo">
+                <span class="marca">VC</span>
+                <div>
+                    <h2>Comentar propuesta</h2>
+                    <p>Sección separada para capturar comentarios de apoyo, observaciones o preguntas.</p>
+                </div>
+            </div>
+            <form id="formComentario">
+                <input id="comentarioId" placeholder="ID de propuesta" required>
+                <input id="autorComentario" placeholder="Autor del comentario" required>
+                <select id="tipoComentario" required>
+                    <option value="Apoyo">Apoyo</option>
+                    <option value="Observación">Observación</option>
+                    <option value="Pregunta">Pregunta</option>
+                    <option value="Mejora">Mejora</option>
+                </select>
+                <textarea id="mensajeComentario" placeholder="Escribe el comentario con claridad" required></textarea>
+                <button type="submit">Enviar comentario</button>
+            </form>
+        </section>
+
+        <section id="tabModificacion" class="panel tab-content">
+            <div class="panel-titulo">
+                <span class="marca">VC</span>
+                <div>
+                    <h2>Proponer modificación</h2>
+                    <p>Permite sugerir cambios concretos al texto normativo sin mezclarlo con comentarios.</p>
+                </div>
+            </div>
+            <form id="formModificacion">
+                <input id="modificacionId" placeholder="ID de propuesta" required>
+                <input id="autorModificacion" placeholder="Autor de la modificación" required>
+                <textarea id="descripcionModificacion" placeholder="Qué parte se desea mejorar y por qué" required></textarea>
+                <textarea id="textoModificacion" placeholder="Nuevo texto propuesto" required></textarea>
+                <button type="submit">Guardar modificación</button>
+            </form>
+        </section>
+
+        <section id="tabRecursos" class="panel tab-content">
+            <div class="panel-titulo">
+                <span class="marca">VC</span>
+                <div>
+                    <h2>Recursos de soporte</h2>
+                    <p>Adjunta estudios, estadísticas, videos, audios o documentos de respaldo.</p>
+                </div>
+            </div>
+            <form id="formRecurso">
+                <input id="recursoId" placeholder="ID de propuesta" required>
+                <input id="nombreRecurso" placeholder="Nombre del recurso" required>
+                <select id="tipoRecurso" required>
+                    <option value="ESTUDIO">Estudio</option>
+                    <option value="ESTADISTICA">Estadística</option>
+                    <option value="VIDEO">Video</option>
+                    <option value="AUDIO">Audio</option>
+                    <option value="DOCUMENTO">Documento</option>
+                </select>
+                <input id="urlRecurso" placeholder="URL del recurso" required>
+                <button type="submit">Guardar recurso</button>
+            </form>
+        </section>
+
+        <section id="tabFirmaDigital" class="panel tab-content">
+            <div class="panel-titulo">
+                <span class="marca">VC</span>
+                <div>
+                    <h2>Firma digital del expediente</h2>
+                    <p>Sección para el usuario del Congreso. Registra una carcasa de firma digital del expediente congelado.</p>
+                </div>
+            </div>
+            <form id="formFirmaDigital">
+                <input id="firmaDigitalId" placeholder="ID de propuesta" required>
+                <input id="firmanteDigital" placeholder="Firmante" required>
+                <input id="cargoDigital" placeholder="Cargo" required>
+                <input id="certificadoReferencia" placeholder="Referencia del certificado digital" required>
+                <button type="submit">Aplicar firma digital</button>
+            </form>
+        </section>
+
+        <section id="tabCongreso" class="panel tab-content">
+            <div class="barra">
+                <div class="panel-titulo sin-margen">
+                    <span class="marca">VC</span>
+                    <div>
+                        <h2>Expedientes congelados automáticamente</h2>
+                        <p>Vista para el usuario del Congreso. Muestra propuestas enviadas, hash, fecha de congelamiento y expediente.</p>
+                    </div>
+                </div>
+                <button id="btnActualizarCongreso" class="boton-secundario">Actualizar</button>
+            </div>
+            <div id="listaCongreso"></div>
+        </section>
+
+        <section id="tabListado" class="panel tab-content">
+            <div class="barra">
+                <div class="panel-titulo sin-margen">
+                    <span class="marca">VC</span>
+                    <div>
+                        <h2>Propuestas registradas</h2>
+                        <p>Consulta avance de firmas, comentarios, modificaciones, recursos y expediente.</p>
+                    </div>
+                </div>
+                <button id="btnActualizar" class="boton-secundario">Actualizar</button>
+            </div>
+            <div id="listaPropuestas"></div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
