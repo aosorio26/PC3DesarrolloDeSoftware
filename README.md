@@ -1,4 +1,4 @@
-# Reporta Tu Calle - PC3 Patrones Estructurales
+# Voz Ciudadana - PC3 Patrones Estructurales
 
 ## Instrucciones para revisión del programa (para que se pueda ejecutar)
 Profesor, le dejo presente las instrucciones por si se necesita correr el programa.
